@@ -1,0 +1,34 @@
+{
+    "name": "franckysolo/octopush-sdk",
+    "description": "Php SDK for octopush API SMS",
+    "keywords": ["octopush", "php", "sms"],
+    "license": "MIT",
+    "type": "sdk",
+    "authors": [
+        {
+            "name": "franckysolo",
+            "email": "franckysolo@gmail.com"
+        }
+    ],
+    "autoload": {
+        "classmap": ["src/"],
+        "psr-4": {
+            "Octopush\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+      "test": "./vendor/bin/phpunit"
+    },
+    "require": {
+      "php": "^7.1.3"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7.1"
+    },
+    "minimum-stability": "dev"
+}
