@@ -73,6 +73,11 @@ class Client
         $this->login = (string) $login;
         $this->apiKey = (string) $key;
         $this->port = (int) $port;
+        // set the scheme url
+        // maybe we can remove port @var will be not used anymore !
+        // @test
+        $scheme = $this->port === 443 ? 'https' : 'http';
+        $this->url = sprintf('%s:%s', $scheme, $this->url);
     }
 
     /**
@@ -178,7 +183,7 @@ class Client
         $doc->loadXML($response);
 
         $errors = libxml_get_errors();
-        if (! empty($errors)) {
+        if (!empty($errors)) {
             $this->errors[] = 'Xml response is invalid';
         }
 
