@@ -35,11 +35,25 @@ class Client
     protected $apiKey;
 
     /**
+     * Api Response
+     *
+     * @var stdClass
+     */
+    protected $response;
+
+    /**
      * Port number 80 for http | 443 for https
      *
      * @var int
      */
     protected $port = 443;
+
+    /**
+     * The API errors
+     *
+     * @var array
+     */
+    protected $errors = [];
 
     /**
      * Create a new sms client
@@ -64,9 +78,10 @@ class Client
      *
      * @param  string $url   The url API
      * @param  array $params The query params
-     * @throws CurlResponseCodeException
-     * @throws CurlResponseException
-     * @return [type]         [description]
+     * @return \Octopush\Client
+     *
+     * @throws \Octopush\Exceptions\CurlResponseException
+     * @throws \Octopush\Exceptions\CurlResponseCodeException
      */
     public function request($url, $params)
     {
@@ -79,8 +94,8 @@ class Client
 
         if ($responseCode !== 200) {
             throw new CurlResponseCodeException(
-              sprintf('Octopush API Server returns error code %d', $responseCode),
-              500
+                sprintf('Octopush API Server returns error code %d', $responseCode),
+                500
             );
         }
 
@@ -88,15 +103,15 @@ class Client
             $erroMessage = curl_error($ch) ?? 'no curl error specify';
             curl_close($ch);
             throw new CurlResponseException(
-              sprintf('Could not get response from %s: %s', $url, $errorMessage),
-              curl_errno($ch)
+                sprintf('Could not get response from %s: %s', $url, $errorMessage),
+                curl_errno($ch)
             );
         }
 
-        // @TODO set the errors table datas
-        // $this->setErrors();
-        //
-        // set the response @var or @class
+        $this->setErrors($response);
+        $this->response = $this->decode($response);
+
+        return $this;
     }
 
     /**
@@ -130,13 +145,41 @@ class Client
         ];
     }
 
+    /**
+     * Check if curl is activate
+     *
+     * @return void
+     *
+     * @throws \Octopush\Exceptions\CurlRequiredException
+     */
     protected function initCurl()
     {
-        // @TODO...
+        if (!extension_loaded('curl')) {
+            throw new CurlRequiredException(
+                'Curl extension is required to use Octopush-sdk',
+                500
+            );
+        }
     }
 
-    protected function setErrors()
+    /**
+     * Set the xml errors
+     *
+     * @param string $response
+     * @return \Octopush\Client
+     */
+    protected function setErrors($response)
     {
-        // @TODO...
+        libxml_use_internal_errors(true);
+
+        $doc = new DOMDocument('1.0', 'utf-8');
+        $doc->loadXML($response);
+
+        $errors = libxml_get_errors();
+        if (! empty($errors)) {
+            $this->errors[] = 'Xml response is invalid';
+        }
+
+        return $this;
     }
 }
