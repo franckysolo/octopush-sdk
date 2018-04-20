@@ -9,7 +9,7 @@ use \RuntimeException;
  * @version 1.0
  * @package Octopush
  *
- *  The curl required excpetion
+ *  The curl required exception
  */
 class CurlRequiredException extends RuntimeException
 {

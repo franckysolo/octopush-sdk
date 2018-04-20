@@ -90,7 +90,12 @@ class Client
      */
     public function request($url, $params)
     {
+        $params = array_merge($params, [
+          'user_login' => $this->login,
+          'api_key' => $this->apiKey
+        ]);
         $query = http_build_query($params);
+        // $query = $this->buidQuery($params);
 
         $ch = curl_init();
         curl_setopt_array($ch, $this->serCurlOptions($url, $query));
@@ -98,6 +103,7 @@ class Client
         $responseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
         if ($responseCode !== 200) {
+            curl_close($ch);
             throw new CurlResponseCodeException(
                 sprintf('Octopush API Server returns error code %d', $responseCode),
                 500
@@ -106,15 +112,18 @@ class Client
 
         if (false === $response) {
             $erroMessage = curl_error($ch) ?? 'no curl error specify';
+            $errno = curl_errno($ch);
             curl_close($ch);
             throw new CurlResponseException(
                 sprintf('Could not get response from %s: %s', $url, $errorMessage),
-                curl_errno($ch)
+                $errno
             );
         }
 
         $this->setErrors($response);
         $this->response = $this->decode($response);
+
+        curl_close($ch);
 
         return $this;
     }
