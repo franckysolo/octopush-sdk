@@ -2,7 +2,9 @@
 
 namespace Octopush;
 
-use Octopush\Exceptions\ResponseCurlException;
+use Octopush\Exceptions\CurlResponseException;
+use Octopush\Exceptions\CurlResponseCodeException;
+use Octopush\Exceptions\CurlRequiredException;
 
 /**
  * @author franckysolo <franckysolo@gmail.com>
@@ -172,7 +174,7 @@ class Client
     {
         libxml_use_internal_errors(true);
 
-        $doc = new DOMDocument('1.0', 'utf-8');
+        $doc = new \DOMDocument('1.0', 'utf-8');
         $doc->loadXML($response);
 
         $errors = libxml_get_errors();
