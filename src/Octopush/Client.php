@@ -37,18 +37,18 @@ class Client
     protected $apiKey;
 
     /**
+     * HTTP port
+     *
+     * @var int
+     */
+    protected $port;
+
+    /**
      * Api Response
      *
      * @var stdClass
      */
     protected $response;
-
-    /**
-     * Port number 80 for http | 443 for https
-     *
-     * @var int
-     */
-    protected $port = 443;
 
     /**
      * The API errors
@@ -74,8 +74,6 @@ class Client
         $this->apiKey = (string) $key;
         $this->port = (int) $port;
         // set the scheme url
-        // maybe we can remove port @var will be not used anymore !
-        // @test
         $scheme = $this->port === 443 ? 'https' : 'http';
         $this->url = sprintf('%s:%s', $scheme, $this->url);
     }
@@ -122,8 +120,31 @@ class Client
     }
 
     /**
+     * Returns the response
+     *
+     * @see decode()
+     * @return stdClass the curl response
+     */
+    public function getResponse()
+    {
+        return $this->response;
+    }
+
+    /**
+     * Returns the array errors
+     *
+     * @see setErrors()
+     * @return array
+     */
+    public function getErrors()
+    {
+        return $this->errors;
+    }
+
+    /**
      * Decode Curl Response xml to php stdClass
      *
+     * @TODO maybe move in Trait
      * @param string $response The xml response returns by curl request
      * @return mixed stdClass
      */
