@@ -161,17 +161,8 @@ class Message
             }
         }
 
-        $methods = get_class_methods($this);
         foreach ($params as $key => $value) {
             $method = 'set' . $this->setMethod($key);
-            if (! method_exists($this, $method)) {
-                $message = sprintf(
-                  "The method %s is not defined for %s class",
-                  $method,
-                  get_class($this)
-                );
-                throw new \InvalidArgumentException($message, 500);
-            }
             $this->$method($value);
         }
 
@@ -215,8 +206,9 @@ class Message
     public function encrypt(array $params = [])
     {
         $requestString = '';
-        for ($i = 0, $n = strlen($this->request_keys); $i < $n; ++$i) {
-            $char = $this->request_keys[$i];
+        $requestKey = $this->params['request_keys'];
+        for ($i = 0, $n = strlen($requestKey); $i < $n; ++$i) {
+            $char = $requestKey[$i];
             if (!isset($this->encryptData[$char])
               || !isset($params[$this->encryptData[$char]])) {
                 continue;
@@ -242,12 +234,13 @@ class Message
     /**
      * Liste des numéros au format international +XXZZZZZ,
      *
-     * @param array $recipients tableau de numéro de phone
+     * @param mixed string | array $recipients  numéro de phone
      * @return \Octopush\Message
      */
-    public function setSmsRecipients(array $recipients = array())
+    public function setSmsRecipients($recipients)
     {
-        $this->params['sms_recipients'] = implode(',', $recipients);
+        $this->params['sms_recipients'] =
+          is_array($recipients) ? implode(',', $recipients) : $recipients;
         return $this;
     }
 
@@ -418,6 +411,91 @@ class Message
     public function setRequestKeys($requestKeys)
     {
         $this->params['request_keys'] = $requestKeys;
+        return $this;
+    }
+
+    /**
+     *  request_id 	Optionnel
+     *  Permet d'ajouter une sécurité à l'envoi.
+     *  Si ce champ est différent de null, alors le système viendra vérifier
+     *  s'il n'y pas déjà un de vos envois ayant
+     *  le même request_id. Si c'est le cas,
+     *  la requête est ignorée.
+     * @param DateTime $timestamp [description]
+     */
+    public function setRequestId($rid)
+    {
+        $this->params['request_id'] = $rid;
+        return $this;
+    }
+
+    /**
+     * msisdn_sender 	Optionnel
+     * défaut : 0. Certains opérateurs internationaux autorisent
+     * les numéros de téléphone comme émetteur.
+     * Dans ce cas, ce champ doit être à 1.
+     */
+    public function setMsisdnSender($sender)
+    {
+        if ($sender > 1) {
+            $message = sprintf(
+              'This Msisdn %s is not supported 0 or 1 expected!',
+              $sender
+            );
+            throw new \InvalidArgumentException($message, 500);
+        }
+        $this->params['msisdn_sender'] = $sender;
+        return $this;
+    }
+    /**
+     * recipients_first_names 	Optionnel
+     * Remplacent la chaîne {prenom} de votre message.
+     * @param array $firstnames [description]
+     */
+    public function setRecipientsFirstNames(array $firstnames = [])
+    {
+        $this->params['recipients_first_names'] = implode(',', $firstnames);
+        return $this;
+    }
+    /**
+     * recipients_last_names 	Optionnel
+     * Remplacent la chaîne {nom} de votre message,
+     * séparés par des virgules.
+     * @param array $firstnames [description]
+     */
+    public function setRecipientsLastNames(array $lastnames = [])
+    {
+        $this->params['recipients_last_names'] = implode(',', $lastnames);
+        return $this;
+    }
+    /**
+     * sms_fields_1 	Optionnel
+     * Remplacent la chaîne {ch1} de votre message, séparés par des virgules.
+     * @param array $fields [description]
+     */
+    public function setSmsFields1(array $fields = [])
+    {
+        $this->params['sms_fields_1'] = implode(',', $fields);
+        return $this;
+    }
+    /**
+     * sms_fields_2 	Optionnel
+     * Remplacent la chaîne {ch2} de votre message, séparés par des virgules.
+     * @param array $fields [description]
+     */
+    public function setSmsFields2(array $fields = [])
+    {
+        $this->params['sms_fields_2'] = implode(',', $fields);
+        return $this;
+    }
+    /**
+     * sms_fields_3 	Optionnel
+     * Remplacent la chaîne {ch3} de votre message, séparés par des virgules.
+     * @param array $fields [description]
+     */
+    public function setSmsFields3(array $fields = [])
+    {
+        $this->params['sms_fields_3'] = implode(',', $fields);
         return $this;
     }
 }

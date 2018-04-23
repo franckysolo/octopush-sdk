@@ -2,9 +2,7 @@
 
 namespace Octopush;
 
-use Octopush\Exceptions\CurlResponseException;
-use Octopush\Exceptions\CurlResponseCodeException;
-use Octopush\Exceptions\CurlRequiredException;
+use Octopush\Curl;
 
 /**
  * @author franckysolo <franckysolo@gmail.com>
@@ -77,61 +75,56 @@ class Client
     }
 
     /**
+     * Send a sms message
+     * @param  [type] $message [description]
+     * @param  array  $options [description]
+     * @return bool true id sms is send or false if an error occured
+     */
+    public function send($message, array $options = [])
+    {
+        $sms = new Message($options);
+        $this->request('sms', $sms->getParams());
+        $response = $this->getResponse();
+
+        if ($response['error_code'] !== '000') {
+            $this->errors[] = $response['error_code'];
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
      * Send a curl request
      *
      * @param  string $url   The url API
      * @param  array $params The query params
      * @return \Octopush\Client
-     *
-     * @throws \Octopush\Exceptions\CurlRequiredException
-     * @throws \Octopush\Exceptions\CurlResponseException
-     * @throws \Octopush\Exceptions\CurlResponseCodeException
      */
     public function request($url, array $params = [])
     {
-        // Verify if curl is activate
-        if (!$this->hasCurl()) {
-            throw new CurlRequiredException(
-              'Curl extension is required to use Octopush-sdk',
-              500
-          );
-        }
+        $curl = new Curl();
+        $query = $this->buildQuery($params);
+        $curl->setOptions($this->url . $url, $query, $this->port);
+        $response = $curl->exec();
+        $this->setResponse($response);
+        $this->setErrors($response);
+        return $this;
+    }
+
+    /**
+     * Merge the credentials and params then returns the string query
+     *
+     * @param  array  $params The params array
+     * @return string  The query string
+     */
+    public function buildQuery(array $params = [])
+    {
         $params = array_merge($params, [
           'user_login' => $this->login,
           'api_key' => $this->apiKey
         ]);
-        $query = http_build_query($params);
-        // $query = $this->buidQuery($params);
-
-        $ch = curl_init();
-        curl_setopt_array($ch, $this->setCurlOptions($this->url . $url, $query));
-        $response = curl_exec($ch);
-        $responseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-
-        if ($responseCode !== 200) {
-            curl_close($ch);
-            throw new CurlResponseCodeException(
-                sprintf('Octopush API Server returns error code %d', $responseCode),
-                500
-            );
-        }
-
-        if (false === $response) {
-            $erroMessage = curl_error($ch) ?? 'no curl error specify';
-            $errno = curl_errno($ch);
-            curl_close($ch);
-            throw new CurlResponseException(
-                sprintf('Could not get response from %s: %s', $url, $errorMessage),
-                $errno
-            );
-        }
-
-        $this->setErrors($response);
-        $this->response = $this->decode($response);
-
-        curl_close($ch);
-
-        return $this;
+        return http_build_query($params);
     }
 
     /**
@@ -143,6 +136,16 @@ class Client
     public function getUrl()
     {
         return $this->url;
+    }
+
+    /**
+     * Sets and encode the respoponse xml to php array
+     * @param string $response The xml response string
+     */
+    public function setResponse($response)
+    {
+        $this->response = $this->decode($response);
+        return $this;
     }
 
     /**
@@ -177,36 +180,6 @@ class Client
     public function decode($response)
     {
         return json_decode(json_encode(simplexml_load_string($response)), true);
-    }
-
-    /**
-     * Sets the Curl options
-     *
-     * @param  string $url   The url API
-     * @param string $query The query string builded
-     * @return array
-     */
-    protected function setCurlOptions($url, $query)
-    {
-        return [
-            CURLOPT_URL => $url,
-            CURLOPT_POST => true,
-            CURLOPT_PORT => $this->port,
-            CURLOPT_POSTFIELDS => $query,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_SSL_VERIFYPEER => false,
-            CURLOPT_FRESH_CONNECT => true
-        ];
-    }
-
-    /**
-     * Check if curl is activate
-     *
-     * @return void
-     */
-    protected function hasCurl()
-    {
-        return extension_loaded('curl');
     }
 
     /**

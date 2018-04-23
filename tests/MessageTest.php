@@ -29,7 +29,8 @@ class MessageTest extends TestCase
           'sms_type' => Message::SMS_LOW_COST,
           'sms_sender' => 'Octopush sdk',
           'request_mode' => Message::SIMULATION_MODE,
-          'sms_mode' => Message::NO_DELAY
+          'sms_mode' => Message::NO_DELAY,
+          'msisdn_sender' => 0
         ]);
         $this->assertInstanceOf(Message::class, $message);
         return $message;
@@ -41,7 +42,7 @@ class MessageTest extends TestCase
      * @expectedExceptionMessage The sms text is too long
      * @return void
      */
-    public function testCreateMessageWithWithTooMuchChars()
+    public function testCreateMessageWithTooLongText()
     {
         new Message([
           'sms_recipients' => ['06000000'],
@@ -120,6 +121,25 @@ class MessageTest extends TestCase
 
     /**
      * @test
+     * @expectedException InvalidArgumentException
+     * @expectedExceptionMessage This Msisdn 7 is not supported 0 or 1 expected!
+     * @return void
+     */
+    public function testCreateInstanceOfMessageWithInvalidMsisdnSender()
+    {
+        new Message([
+          'sms_recipients' => ['06000000'],
+          'sms_text' => 'Message premium sms',
+          'sms_type' => Message::SMS_PREMIUM,
+          'sms_sender' => 'Octopush sdk',
+          'request_mode' => Message::REAL_MODE,
+          'sms_mode' =>  Message::NO_DELAY,
+          'msisdn_sender' => 7
+        ]);
+    }
+
+    /**
+     * @test
      * @return void
      */
     public function testCreateMessagePremium()
@@ -152,6 +172,9 @@ class MessageTest extends TestCase
           'sending_date' => (new \DateTime('now'))->modify('+1 year')
         ]);
         // sending_time is define by default
+        // force it
+        $message->setSendingTime(new \DateTime('now'));
+        $message->setSendingPeriod((new \DateTime('now'))->modify('+10 minutes'));
         $this->assertArrayHasKey('sms_mode', $message->getParams());
         $this->assertArrayHasKey('sending_date', $message->getParams());
         $this->assertArrayHasKey('sending_time', $message->getParams());
@@ -191,5 +214,89 @@ class MessageTest extends TestCase
         ]);
 
         $this->assertArrayHasKey('transactional', $message->getParams());
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function testCreatePublipostageMessage()
+    {
+        $text = '{ch1} {nom} {prenom}, your session begin at {ch2} the {ch3}';
+        $message = new Message([
+          'sms_recipients' => [TEST_PHONE_NUMBER, TEST_PHONE_NUMBER],
+          'sms_text' => $text,
+          'sms_type' => Message::SMS_LOW_COST,
+          'sms_sender' => 'Octopush sdk',
+          'request_mode' => Message::SIMULATION_MODE,
+          'recipients_first_names' => ['John', 'Jane'],
+          'recipients_last_names' => ['John', 'Jane'],
+          'sms_fields_1' => ['Mr', 'Miss'],
+          'sms_fields_2' => ['08:00 am', '01:00 pm'],
+          'sms_fields_3' => ['2018/05/21', '2018/05/22'],
+        ]);
+
+        $this->assertArrayHasKey('recipients_first_names', $message->getParams());
+        $this->assertArrayHasKey('recipients_last_names', $message->getParams());
+        $this->assertArrayHasKey('sms_fields_1', $message->getParams());
+        $this->assertArrayHasKey('sms_fields_2', $message->getParams());
+        $this->assertArrayHasKey('sms_fields_3', $message->getParams());
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function testCreateMessageWithRequestKeys()
+    {
+        $message = new Message([
+          'sms_recipients' => ['06000000'],
+          'sms_text' => 'Message premium sms',
+          'sms_type' => Message::SMS_PREMIUM,
+          'sms_sender' => 'Octopush sdk',
+          'request_mode' => Message::REAL_MODE,
+          'request_id' => uniqid(),
+          'request_keys' => 'TRYS',
+        ]);
+
+        $this->assertArrayHasKey('request_sha1', $message->getParams());
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function testCreateMessageWithUnvalidRequestKeys()
+    {
+        $message = new Message([
+          'sms_recipients' => ['06000000'],
+          'sms_text' => 'Message premium sms',
+          'sms_type' => Message::SMS_PREMIUM,
+          'sms_sender' => 'Octopush sdk',
+          'request_mode' => Message::REAL_MODE,
+          'request_id' => uniqid(),
+          'request_keys' => 'TRYS$',
+        ]);
+
+        $this->assertArrayHasKey('request_sha1', $message->getParams());
+    }
+
+    /**
+     * @test
+     * @expectedException InvalidArgumentException
+     * @expectedExceptionMessage Missing required params for Octopush message
+     * @return void
+     */
+    public function testCreateMessageWithUnvalidParams()
+    {
+        $message = new Message([
+          'sms_recipients' => ['06000000'],
+          'sms_text' => 'Message premium sms',
+          'sms_type' => Message::SMS_PREMIUM,
+          'sms_sender' => 'Octopush sdk',
+          'request_mode' => Message::REAL_MODE,
+          'request_id' => uniqid(),
+          'request_key' => 'TRYS',
+        ]);
     }
 }

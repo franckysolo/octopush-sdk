@@ -11,8 +11,19 @@ use Octopush\Contracts\OctopushApiInterface;
  */
 class Api implements OctopushApiInterface
 {
+    /**
+     * Octopush client
+     * @var Octopush\Client
+     */
     protected $client;
 
+    /**
+     * Create a new API service
+     *
+     * @param string $login The Octopush login key
+     * @param string $key   The Octopush api key
+     * @return void
+     */
     public function __construct($login, $key)
     {
         $this->client = new Client($login, $key);
@@ -21,7 +32,7 @@ class Api implements OctopushApiInterface
     /**
      * Returns the api client
      *
-     * @return Client
+     * @return \Octopush\Client
      */
     public function getClient()
     {
@@ -45,12 +56,13 @@ class Api implements OctopushApiInterface
         // @TODO use money_format string response
         return (float) $response['credit'];
     }
+    
     /**
      * Retourne le solde en nombre de SMS
      * Le résultat donne le solde en Premium et en Standard.
      *
-     * @param  boolean $standard [description]
-     * @return [type]            [description]
+     * @param  boolean $standard
+     * @return float
      */
     public function getBalance($standard = true)
     {
@@ -68,8 +80,15 @@ class Api implements OctopushApiInterface
         return floor($response['balance'][0]);
     }
 
+    /**
+     * Send a sms message
+     *
+     * @param  string $message The string message
+     * @param  array  $options The array options
+     * @return bool   true if message is send otherwise false
+     */
     public function sendMessage($message, array $options = [])
     {
-        // @TODO implement
+        return $this->client->send($message, $options);
     }
 }
