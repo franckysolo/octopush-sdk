@@ -5,64 +5,22 @@ namespace Octopush\Contracts;
 interface OctopushApiInterface
 {
     /**
-     * [SMS_LOW_COST description]
+     * Returns the remaining credit in euro
      *
-     * @var string
-     */
-    const SMS_LOW_COST = 'XXX';
-
-    /**
-     * [SMS_PREMIUM description]
-     *
-     * @var string
-     */
-    const SMS_PREMIUM = 'FR';
-
-    /**
-     * [SMS_WORLD description]
-     *
-     * @var string
-     */
-    const SMS_WORLD = 'WWW';
-
-    /**
-     * [REAL_MODE description]
-     * @var string
-     */
-    const REAL_MODE = 'real';
-
-    /**
-     * [SIMULATION_MODE description]
-     * @var string
-     */
-    const SIMULATION_MODE = 'simu';
-
-    /**
-     * [NO_DELAY description]
-     * @var integer
-     */
-    const NO_DELAY = 1;
-
-    /**
-     * [WITH_DELAY description]
-     * @var integer
-     */
-    const WITH_DELAY = 2;
-
-    /**
-     * [getCredit description]
-     * @return [type] [description]
+     * @return float the value in sms
      */
     public function getCredit();
 
     /**
-     * [getBalance description]
-     * @return [type] [description]
+     * Returns the remaining balance in premium or standard
+     *
+     * @return float the value in sms
      */
     public function getBalance($standard);
 
     /**
-     * [sendMessage description]
+     * Sending SMS Octopush Message
+     *
      * @return [type] [description]
      */
     public function sendMessage($message, array $options);

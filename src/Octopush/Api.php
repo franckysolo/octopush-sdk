@@ -19,6 +19,16 @@ class Api implements OctopushApiInterface
     }
 
     /**
+     * Returns the api client
+     *
+     * @return Client
+     */
+    public function getClient()
+    {
+        return $this->client;
+    }
+
+    /**
      * Retourne le solde sms en Euros.
      *
      * @return float
@@ -60,5 +70,6 @@ class Api implements OctopushApiInterface
 
     public function sendMessage($message, array $options = [])
     {
+        // @TODO implement
     }
 }

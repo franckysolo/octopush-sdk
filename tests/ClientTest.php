@@ -2,39 +2,14 @@
 
 namespace Test;
 
-use PHPUnit\Framework\TestCase;
+use Test\AbstractTest;
 use Octopush\Client;
 use Octopush\Exceptions\CurlRequiredException;
 use Octopush\Exceptions\CurlResponseException;
 use Octopush\Exceptions\CurlResponseCodeException;
 
-// defines api key & login octopush in config/env.php
-require_once 'config/env.php';
-
-class ClientTest extends TestCase
+class ClientTest extends AbstractTest
 {
-    /**
-     * The login identifier
-     *
-     * @var string
-     */
-    protected $login;
-
-    /**
-     * The api key identifier
-     *
-     * @var string
-     */
-    protected $apiKey;
-
-
-    public function setUp()
-    {
-        parent::setUp();
-        $this->login = OCTOPUSH_LOGIN;
-        $this->apiKey = OCTOPUSH_API_KEY;
-    }
-
     /** @test */
     public function testCreateInstanceOfClient()
     {
@@ -83,7 +58,7 @@ class ClientTest extends TestCase
         $url = 'test-credit';
         $client->request($url);
     }
-    
+
     /**
     * @test
     * @return void
