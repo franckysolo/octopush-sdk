@@ -67,8 +67,6 @@ class Client
      */
     public function __construct($login, $key, $port = 443)
     {
-        // Verify if curl is activate
-        $this->initCurl();
         // set the class params
         $this->login = (string) $login;
         $this->apiKey = (string) $key;
@@ -85,11 +83,19 @@ class Client
      * @param  array $params The query params
      * @return \Octopush\Client
      *
+     * @throws \Octopush\Exceptions\CurlRequiredException
      * @throws \Octopush\Exceptions\CurlResponseException
      * @throws \Octopush\Exceptions\CurlResponseCodeException
      */
-    public function request($url, $params)
+    public function request($url, array $params = [])
     {
+        // Verify if curl is activate
+        if (!$this->hasCurl()) {
+            throw new CurlRequiredException(
+              'Curl extension is required to use Octopush-sdk',
+              500
+          );
+        }
         $params = array_merge($params, [
           'user_login' => $this->login,
           'api_key' => $this->apiKey
@@ -98,7 +104,7 @@ class Client
         // $query = $this->buidQuery($params);
 
         $ch = curl_init();
-        curl_setopt_array($ch, $this->serCurlOptions($url, $query));
+        curl_setopt_array($ch, $this->setCurlOptions($this->url . $url, $query));
         $response = curl_exec($ch);
         $responseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
@@ -126,6 +132,17 @@ class Client
         curl_close($ch);
 
         return $this;
+    }
+
+    /**
+     * Returns the formatted url with http scheme for port 80
+     * or https for port 443
+     *
+     * @return string The formatted url
+     */
+    public function getUrl()
+    {
+        return $this->url;
     }
 
     /**
@@ -186,17 +203,10 @@ class Client
      * Check if curl is activate
      *
      * @return void
-     *
-     * @throws \Octopush\Exceptions\CurlRequiredException
      */
-    protected function initCurl()
+    protected function hasCurl()
     {
-        if (!extension_loaded('curl')) {
-            throw new CurlRequiredException(
-                'Curl extension is required to use Octopush-sdk',
-                500
-            );
-        }
+        return extension_loaded('curl');
     }
 
     /**

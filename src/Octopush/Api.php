@@ -58,7 +58,7 @@ class Api implements OctopushApiInterface
         return floor($response['balance'][0]);
     }
 
-    public function sendMessage()
+    public function sendMessage($message, array $options = [])
     {
     }
 }

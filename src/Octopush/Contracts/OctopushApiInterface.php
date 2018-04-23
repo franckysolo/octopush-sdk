@@ -65,5 +65,5 @@ interface OctopushApiInterface
      * [sendMessage description]
      * @return [type] [description]
      */
-    public function sendMessage($message, $options);
+    public function sendMessage($message, array $options);
 }
