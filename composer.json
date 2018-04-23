@@ -3,7 +3,7 @@
     "description": "Php SDK for octopush API SMS",
     "keywords": ["octopush", "php", "sms"],
     "license": "MIT",
-    "type": "sdk",
+    "type": "library",
     "authors": [
         {
             "name": "franckysolo",
