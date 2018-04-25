@@ -76,9 +76,10 @@ class Client
 
     /**
      * Send a sms message
-     * @param  [type] $message [description]
-     * @param  array  $options [description]
-     * @return bool true id sms is send or false if an error occured
+     *
+     * @param  string $message The string message
+     * @param  array  $options The array options
+     * @return bool   true if message is send otherwise false
      */
     public function send($message, array $options = [])
     {
@@ -152,7 +153,7 @@ class Client
      * Returns the response
      *
      * @see decode()
-     * @return stdClass the curl response
+     * @return array the curl response
      */
     public function getResponse()
     {
@@ -173,9 +174,8 @@ class Client
     /**
      * Decode Curl Response xml to php stdClass
      *
-     * @TODO maybe move in Trait
      * @param string $response The xml response returns by curl request
-     * @return mixed stdClass
+     * @return array
      */
     public function decode($response)
     {

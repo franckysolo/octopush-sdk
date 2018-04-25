@@ -19,5 +19,5 @@ $api->sendMessage($message, [
 ]);
 ?>
 <pre>
-<?php echo var_dump($api->getClient()->getResponse());?>
+<?php echo var_dump($api->getResponse());?>
 </pre>

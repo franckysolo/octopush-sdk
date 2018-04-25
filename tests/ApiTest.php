@@ -79,7 +79,7 @@ class ApiTest extends AbstractTest
     public function testApiGetCreditClientResponseReturnsArray($api)
     {
         $credit = $api->getCredit();
-        $response = $api->getClient()->getResponse();
+        $response = $api->getResponse();
         $this->assertArrayHasKey('credit', $response);
         $this->assertArrayHasKey('error_code', $response);
         $this->assertEquals('000', $response['error_code']);

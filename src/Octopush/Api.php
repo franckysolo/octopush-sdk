@@ -8,12 +8,14 @@ use Octopush\Contracts\OctopushApiInterface;
  * @author franckysolo <franckysolo@gmail.com>
  * @version 1.0
  * @package Octopush
+ * @see http://www.octopush.com/api-sms-documentation
  */
 class Api implements OctopushApiInterface
 {
     /**
      * Octopush client
-     * @var Octopush\Client
+     *
+     * @var \Octopush\Client
      */
     protected $client;
 
@@ -27,6 +29,16 @@ class Api implements OctopushApiInterface
     public function __construct($login, $key)
     {
         $this->client = new Client($login, $key);
+    }
+
+    /**
+     * Returns the client response
+     *
+     * @return array The client response php array
+     */
+    public function getResponse()
+    {
+        return $this->client->getResponse();
     }
 
     /**
@@ -47,27 +59,25 @@ class Api implements OctopushApiInterface
     public function getCredit()
     {
         $this->client->request('credit');
-        $response = $this->client->getResponse();
+        $response = $this->getResponse();
 
         if ($response['error_code'] !== '000') {
             return 0.00;
         }
 
-        // @TODO use money_format string response
         return (float) $response['credit'];
     }
-    
+
     /**
-     * Retourne le solde en nombre de SMS
-     * Le résultat donne le solde en Premium et en Standard.
+     * Returns the remaining balance in premium or standard
      *
-     * @param  boolean $standard
-     * @return float
+     * @param  bool $standard true for standard | false for premium
+     * @return float the value in sms
      */
     public function getBalance($standard = true)
     {
         $this->client->request('balance');
-        $response = $this->client->getResponse();
+        $response = $this->getResponse();
 
         if ($response['error_code'] !== '000') {
             return 0;

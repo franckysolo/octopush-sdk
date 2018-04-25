@@ -6,6 +6,13 @@ use Octopush\Exceptions\CurlResponseException;
 use Octopush\Exceptions\CurlResponseCodeException;
 use Octopush\Exceptions\CurlRequiredException;
 
+/**
+ * @author franckysolo <franckysolo@gmail.com>
+ * @version 1.0
+ * @package Octopush
+ *
+ * The curl object for Octopush request API
+ */
 class Curl
 {
     /**
@@ -28,11 +35,16 @@ class Curl
      * Check if curl is activate
      *
      * @return void
+     *
+     * @throws \Octopush\Exceptions\CurlRequiredException
      */
     public function initCurl()
     {
         if (!extension_loaded('curl')) {
-            dl('curl.so');
+            throw new CurlRequiredException(
+              'Curl is required to use Octopush-sdk',
+              500
+            );
         }
     }
 

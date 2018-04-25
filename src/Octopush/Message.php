@@ -47,14 +47,14 @@ class Message
     /**
      * Sms sending immedialty mode value param
      *
-     * @var integer
+     * @var int
      */
     const NO_DELAY = 1;
 
     /**
      * Sms sending with delay mode value param
      *
-     * @var integer
+     * @var int
      */
     const WITH_DELAY = 2;
 
@@ -129,7 +129,7 @@ class Message
     /**
      * Create a new octopush sms message
      *
-     * @param array $options the array options
+     * @param array $params the array params
      * @see $requiredKeys
      * @see $optionalKeys
      */
@@ -234,7 +234,7 @@ class Message
     /**
      * Liste des numéros au format international +XXZZZZZ,
      *
-     * @param mixed string | array $recipients  numéro de phone
+     * @param mixed $recipients  numéros de phone
      * @return \Octopush\Message
      */
     public function setSmsRecipients($recipients)
@@ -347,7 +347,7 @@ class Message
     /**
      * sending_time 	Optionnel
      * Timestamp, indiqué en GMT+1
-     * @param DateTime $timestamp
+     * @param \DateTime $timestamp
      * @return \Octopush\Message
      */
     public function setSendingTime(\DateTime $timestamp)
@@ -362,7 +362,8 @@ class Message
      *   vous sépare de la date souhaitée
      *   et d'éviter les confusions de timezone
      *
-     * @param DateTime $timestamp [description]
+     * @param \DateTime $timestamp [description]
+     * @return \Octopush\Message
      */
     public function setSendingPeriod(\DateTime $timestamp)
     {
@@ -374,6 +375,7 @@ class Message
      *   with_replies 	Optionnel 	Instancier à 1
      *   pour indiquer que vous souhaitez les réponses aux SMS envoyés
      * @param int $withReply [description]
+     * @return \Octopush\Message
      */
     public function setWithReplies($withReply = true)
     {
@@ -390,7 +392,8 @@ class Message
      * immédiate du compte, ainsi que d'une amende de 1000€
      * par infraction constatée)
      * @see http://www.octopush.com/api-sms-doc/sms-transactionnel
-     * @param int $withReply [description]
+     * @param bool $transactional
+     * @return \Octopush\Message
      */
     public function setTransactional($transactional = true)
     {
@@ -406,7 +409,8 @@ class Message
      *   ajouter dans le hash sha1.
      *   Exemple : 'TRYS' (pour les champs sms_text, sms_recipients, sms_type, sms_sender).
      *   Voir le tableau des clés en annexe.
-     * @var [type]
+     * @param string $requestKeys
+     * @return \Octopush\Message
      */
     public function setRequestKeys($requestKeys)
     {
@@ -421,7 +425,8 @@ class Message
      *  s'il n'y pas déjà un de vos envois ayant
      *  le même request_id. Si c'est le cas,
      *  la requête est ignorée.
-     * @param DateTime $timestamp [description]
+     * @param string $rid
+     * @return \Octopush\Message
      */
     public function setRequestId($rid)
     {
@@ -434,6 +439,8 @@ class Message
      * défaut : 0. Certains opérateurs internationaux autorisent
      * les numéros de téléphone comme émetteur.
      * Dans ce cas, ce champ doit être à 1.
+     * @param int $sender
+     * @return \Octopush\Message
      */
     public function setMsisdnSender($sender)
     {
@@ -450,7 +457,8 @@ class Message
     /**
      * recipients_first_names 	Optionnel
      * Remplacent la chaîne {prenom} de votre message.
-     * @param array $firstnames [description]
+     * @param array $firstnames
+     * @return \Octopush\Message
      */
     public function setRecipientsFirstNames(array $firstnames = [])
     {
@@ -461,7 +469,8 @@ class Message
      * recipients_last_names 	Optionnel
      * Remplacent la chaîne {nom} de votre message,
      * séparés par des virgules.
-     * @param array $firstnames [description]
+     * @param array $lastnames
+     * @return \Octopush\Message
      */
     public function setRecipientsLastNames(array $lastnames = [])
     {
@@ -471,7 +480,8 @@ class Message
     /**
      * sms_fields_1 	Optionnel
      * Remplacent la chaîne {ch1} de votre message, séparés par des virgules.
-     * @param array $fields [description]
+     * @param array $fields
+     * @return \Octopush\Message
      */
     public function setSmsFields1(array $fields = [])
     {
@@ -481,7 +491,8 @@ class Message
     /**
      * sms_fields_2 	Optionnel
      * Remplacent la chaîne {ch2} de votre message, séparés par des virgules.
-     * @param array $fields [description]
+     * @param array $fields
+     * @return \Octopush\Message
      */
     public function setSmsFields2(array $fields = [])
     {
@@ -491,7 +502,8 @@ class Message
     /**
      * sms_fields_3 	Optionnel
      * Remplacent la chaîne {ch3} de votre message, séparés par des virgules.
-     * @param array $fields [description]
+     * @param array $fields
+     * @return \Octopush\Message
      */
     public function setSmsFields3(array $fields = [])
     {
