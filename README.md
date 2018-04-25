@@ -1,6 +1,6 @@
 # Octopush-sdk
 
-[![Latest Stable Version](https://poser.pugx.org/franckysolo/octopush-sdk/version)](https://packagist.org/franckysolo/octopush-sdk)
+[![Latest Stable Version](https://poser.pugx.org/franckysolo/octopush-sdk/version)](https://packagist.org/packages/franckysolo/octopush-sdk)
 [![Total Downloads](https://poser.pugx.org/franckysolo/octopush-sdk/downloads)](https://packagist.org/packages/franckysolo/octopush-sdk)
 [![Latest Unstable Version](https://poser.pugx.org/franckysolo/octopush-sdk/v/unstable)](//packagist.org/packages/franckysolo/octopush-sdk)
 [![License](https://poser.pugx.org/franckysolo/octopush-sdk/license)](https://packagist.org/packages/franckysolo/octopush-sdk)
