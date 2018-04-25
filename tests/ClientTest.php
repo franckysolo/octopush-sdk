@@ -46,20 +46,6 @@ class ClientTest extends AbstractTest
     }
 
     /**
-     * @test
-     * @depends testCreateInstanceOfClient
-     * @expectedException Octopush\Exceptions\CurlResponseCodeException
-     *
-     * @param \Octopush\Client $client
-     * @return void
-     */
-    public function testClientBadRequest($client)
-    {
-        $url = 'test-credit';
-        $client->request($url);
-    }
-
-    /**
     * @test
     * @return void
      */
