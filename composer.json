@@ -23,7 +23,8 @@
         }
     },
     "scripts": {
-      "test": "./vendor/bin/phpunit"
+      "test": "./vendor/bin/phpunit",
+      "docs": "@php ./vendor/bin/phpDocumentor.phar -d src -t docs"
     },
     "require": {
       "php": "^7.1.3"

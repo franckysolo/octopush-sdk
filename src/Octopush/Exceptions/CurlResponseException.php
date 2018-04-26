@@ -1,15 +1,18 @@
 <?php
-
+/**
+ * The curl response exception
+ *
+ * @version 1.0.1
+ * @package Octopush
+ * @subpackage Exceptions
+ * @author franckysolo <franckysolo@gmail.com>
+ */
 namespace Octopush\Exceptions;
 
 use \RuntimeException;
 
 /**
- * @author franckysolo <franckysolo@gmail.com>
- * @version 1.0
- * @package Octopush
- *
- *  The curl response exception
+ *  The curl response exception class
  */
 class CurlResponseException extends RuntimeException
 {

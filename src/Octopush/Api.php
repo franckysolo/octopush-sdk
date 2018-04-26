@@ -1,13 +1,18 @@
 <?php
-
+/**
+ * The API sdk
+ *
+ * @version 1.0.1
+ * @package Octopush
+ * @author franckysolo <franckysolo@gmail.com>
+ */
 namespace Octopush;
 
 use Octopush\Contracts\OctopushApiInterface;
 
 /**
- * @author franckysolo <franckysolo@gmail.com>
- * @version 1.0
- * @package Octopush
+ * The API to push sms message, get response, credit and balance
+ *
  * @see http://www.octopush.com/api-sms-documentation
  */
 class Api implements OctopushApiInterface

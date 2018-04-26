@@ -1,11 +1,16 @@
 <?php
-
+/**
+ * The API Interface
+ *
+ * @version 1.0.1
+ * @package Octopush
+ * @subpackage Contracts
+ * @author franckysolo <franckysolo@gmail.com>
+ */
 namespace Octopush\Contracts;
 
 /**
- * @author franckysolo <franckysolo@gmail.com>
- * @version 1.0
- * @package Octopush\Contracts
+ * The API Interface
  */
 interface OctopushApiInterface
 {

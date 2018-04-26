@@ -1,15 +1,19 @@
 <?php
-
+/**
+ * The client object
+ *
+ * @version 1.0.1
+ * @package Octopush
+ * @author franckysolo <franckysolo@gmail.com>
+ */
 namespace Octopush;
 
 use Octopush\Curl;
 
 /**
- * @author franckysolo <franckysolo@gmail.com>
- * @version 1.0
- * @package Octopush
+ * The client for Octopush request API
  *
- *  The curl client for Octopush request API
+ * @see http://www.octopush.com/api-sms-documentation
  */
 class Client
 {
@@ -44,7 +48,7 @@ class Client
     /**
      * Api Response
      *
-     * @var stdClass
+     * @var array
      */
     protected $response;
 

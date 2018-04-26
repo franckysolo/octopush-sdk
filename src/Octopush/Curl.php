@@ -1,5 +1,12 @@
 <?php
-
+/**
+ * The curl object
+ *
+ * @version 1.0.1
+ * @package Octopush
+ * @author franckysolo <franckysolo@gmail.com>
+ *
+ */
 namespace Octopush;
 
 use Octopush\Exceptions\CurlResponseException;
@@ -7,10 +14,6 @@ use Octopush\Exceptions\CurlResponseCodeException;
 use Octopush\Exceptions\CurlRequiredException;
 
 /**
- * @author franckysolo <franckysolo@gmail.com>
- * @version 1.0
- * @package Octopush
- *
  * The curl object for Octopush request API
  */
 class Curl
@@ -95,6 +98,7 @@ class Curl
      *
      * @param  string $url  The request url
      * @param string $query The query string builded
+     * @param int $port The port must be 80 or 443
      * @return void
      */
     public function setOptions($url, $query, $port)
@@ -110,6 +114,11 @@ class Curl
         ]);
     }
 
+    /**
+     * Close curl connexion
+     *
+     * @return void
+     */
     public function __destruct()
     {
         if ($this->handle) {
