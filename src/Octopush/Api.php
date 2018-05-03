@@ -2,7 +2,7 @@
 /**
  * The API sdk
  *
- * @version 1.0.1
+ * @version 1.0.2
  * @package Octopush
  * @author franckysolo <franckysolo@gmail.com>
  */
@@ -28,7 +28,7 @@ class Api implements OctopushApiInterface
      * Create a new API service
      *
      * @param string $login The Octopush login key
-     * @param string $key   The Octopush api key
+     * @param string $key   The Octopush API key available on your Octopush manager.
      * @return void
      */
     public function __construct($login, $key)
@@ -74,12 +74,11 @@ class Api implements OctopushApiInterface
     }
 
     /**
-     * Returns the remaining balance in premium or standard
+     * Returns the array remaining balance with premium and low cost value
      *
-     * @param  bool $standard true for standard | false for premium
-     * @return float the value in sms
+     * @return array The balance array
      */
-    public function getBalance($standard = true)
+    public function getBalance()
     {
         $this->client->request('balance');
         $response = $this->getResponse();
@@ -88,11 +87,29 @@ class Api implements OctopushApiInterface
             return 0;
         }
 
-        if ($standard) {
-            return floor($response['balance'][1]);
-        }
+        return $response['balance'];
+    }
 
-        return floor($response['balance'][0]);
+    /**
+     * Returns the remaining balance in premium
+     *
+     * @return int the value in sms
+     */
+    public function getPremiumBalance()
+    {
+        list($premium) = $this->getBalance();
+        return floor($premium);
+    }
+
+    /**
+     * Returns the remaining balance in low cost
+     *
+     * @return int the value in sms
+     */
+    public function getLowCostBalance()
+    {
+        list(, $lowcost) = $this->getBalance();
+        return floor($lowcost);
     }
 
     /**

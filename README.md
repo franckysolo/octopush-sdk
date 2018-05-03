@@ -23,6 +23,7 @@ Create a env.php file in tests/config
 
 define('OCTOPUSH_API_KEY', 'your-key');
 define('OCTOPUSH_LOGIN', 'your-login');
+define('TEST_PHONE_NUMBER', 'your-phone-number');
 
 ?>
 
@@ -36,6 +37,20 @@ composer test
 
 ## Usages
 
+### Config
+
+Create a app.php file in configs directory
+
+```php
+<?php
+
+define('OCTOPUSH_API_KEY', 'your-key');
+define('OCTOPUSH_LOGIN', 'your-login');
+define('TEST_PHONE_NUMBER', '0033601010101'); // for fr format
+define('TEST_PHONE_NUMBER_ALT', '0033601010102');
+
+?>
+```
 
 ### Get Credit
 
@@ -66,10 +81,13 @@ require_once '../configs/app.php';
 use Octopush\Api;
 
 $api = new Api(OCTOPUSH_LOGIN, OCTOPUSH_API_KEY);
-$low = $api->getBalance();
-$premium = $api->getBalance(false);
+$balance = $api->getBalance();
+$premium = $api->getPremiumBalance();
+$low = $api->getLowCostBalance();
 ?>
 <pre>
+  <?php var_dump(balance);?>
+
   Remaining Sms Low cost :  <?php echo $low;?>
 
   Remaining Sms Premium :  <?php echo $premium;?>

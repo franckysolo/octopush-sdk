@@ -2,7 +2,7 @@
 /**
  * The curl required exception
  *
- * @version 1.0.1
+ * @version 1.0.2
  * @package Octopush
  * @subpackage Exceptions
  * @author franckysolo <franckysolo@gmail.com>

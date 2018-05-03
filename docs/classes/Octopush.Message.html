@@ -1,0 +1,1597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta charset="utf-8"/>
+    <title>API Documentation</title>
+    <meta name="author" content=""/>
+    <meta name="description" content=""/>
+
+    <link href="../css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+    <link href="../css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/prism.css" rel="stylesheet" media="all"/>
+    <link href="../css/template.css" rel="stylesheet" media="all"/>
+    
+    <!--[if lt IE 9]>
+    <script src="../js/html5.js"></script>
+    <![endif]-->
+    <script src="../js/jquery-1.11.0.min.js"></script>
+    <script src="../js/ui/1.10.4/jquery-ui.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/jquery.smooth-scroll.js"></script>
+    <script src="../js/prism.min.js"></script>
+    <!-- TODO: Add http://jscrollpane.kelvinluck.com/ to style the scrollbars for browsers not using webkit-->
+    <script type="text/javascript">
+    function loadExternalCodeSnippets() {
+        Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
+            var src = pre.getAttribute('data-src');
+            var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
+            var language = 'php';
+
+            var code = document.createElement('code');
+            code.className = 'language-' + language;
+
+            pre.textContent = '';
+
+            code.textContent = 'Loading…';
+
+            pre.appendChild(code);
+
+            var xhr = new XMLHttpRequest();
+
+            xhr.open('GET', src, true);
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+
+                    if (xhr.status < 400 && xhr.responseText) {
+                        code.textContent = xhr.responseText;
+
+                        Prism.highlightElement(code);
+                    }
+                    else if (xhr.status >= 400) {
+                        code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                    }
+                    else {
+                        code.textContent = '✖ Error: File does not exist or is empty';
+                    }
+                }
+            };
+
+            xhr.send(null);
+        });
+    }
+
+    $(document).ready(function(){
+        loadExternalCodeSnippets();
+    });
+    $('#source-view').on('shown', function () {
+        loadExternalCodeSnippets();
+    })
+</script>
+
+    <link rel="shortcut icon" href="../images/favicon.ico"/>
+    <link rel="apple-touch-icon" href="../images/apple-touch-icon.png"/>
+    <link rel="apple-touch-icon" sizes="72x72" href="../images/apple-touch-icon-72x72.png"/>
+    <link rel="apple-touch-icon" sizes="114x114" href="../images/apple-touch-icon-114x114.png"/>
+</head>
+<body>
+
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <i class="icon-ellipsis-vertical"></i>
+            </a>
+            <a class="brand" href="../index.html">API Documentation</a>
+
+            <div class="nav-collapse">
+                <ul class="nav pull-right">
+                                        <li class="dropdown">
+                        <a href="../index.html" class="dropdown-toggle" data-toggle="dropdown">
+                            API Documentation <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                                                        <li><a href="../namespaces/Octopush.html">\Octopush</a></li>
+                                                    </ul>
+                    </li>
+                                        <li class="dropdown" id="charts-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Charts <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../graphs/class.html">
+                                    <i class="icon-list-alt"></i>&#160;Class hierarchy diagram
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown" id="reports-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Reports <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../reports/errors.html">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">0</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/markers.html">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">0</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/deprecated.html">
+                                                                                                            <i class="icon-list-alt"></i>&#160;Deprecated <span class="label label-info pull-right">0</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--<div class="go_to_top">-->
+    <!--<a href="#___" style="color: inherit">Back to top&#160;&#160;<i class="icon-upload icon-white"></i></a>-->
+    <!--</div>-->
+</div>
+
+<div id="___" class="container-fluid">
+        <section class="row-fluid">
+        <div class="span2 sidebar">
+                                <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-635373559"></a>
+                                <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
+            </div>
+            <div id="namespace-635373559" class="accordion-body collapse in">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-986555733"></a>
+                                <a href="../namespaces/Octopush.html" style="margin-left: 30px; padding-left: 0">Octopush</a>
+            </div>
+            <div id="namespace-986555733" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-475195956"></a>
+                                <a href="../namespaces/Octopush.Contracts.html" style="margin-left: 30px; padding-left: 0">Contracts</a>
+            </div>
+            <div id="namespace-475195956" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                    <li class="interface"><a href="../classes/Octopush.Contracts.OctopushApiInterface.html">OctopushApiInterface</a></li>
+                                                                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-2122189324"></a>
+                                <a href="../namespaces/Octopush.Exceptions.html" style="margin-left: 30px; padding-left: 0">Exceptions</a>
+            </div>
+            <div id="namespace-2122189324" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Octopush.Exceptions.CurlRequiredException.html">CurlRequiredException</a></li>
+                                                    <li class="class"><a href="../classes/Octopush.Exceptions.CurlResponseCodeException.html">CurlResponseCodeException</a></li>
+                                                    <li class="class"><a href="../classes/Octopush.Exceptions.CurlResponseException.html">CurlResponseException</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Octopush.Api.html">Api</a></li>
+                                                    <li class="class"><a href="../classes/Octopush.Client.html">Client</a></li>
+                                                    <li class="class"><a href="../classes/Octopush.Curl.html">Curl</a></li>
+                                                    <li class="class"><a href="../classes/Octopush.Message.html">Message</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        </div>
+    </section>
+    <section class="row-fluid">
+        <div class="span10 offset2">
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <nav>
+                                                <a href="../namespaces/Octopush.html">\Octopush</a> <i class="icon-level-up"></i>
+                                            </nav>
+                    <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
+
+                    <h1><small>\Octopush</small>Message</h1>
+                    <p><em>A representation of Octopush Message</em></p>
+                    
+                    
+                                        
+                    <section id="summary">
+                        <h2>Summary</h2>
+                        <section class="row-fluid heading">
+                            <section class="span4">
+                                <a href="#methods">Methods</a>
+                            </section>
+                            <section class="span4">
+                                <a href="#properties">Properties</a>
+                            </section>
+                            <section class="span4">
+                                <a href="#constants">Constants</a>
+                            </section>
+                        </section>
+                        <section class="row-fluid public">
+                            <section class="span4">
+                                                                    <a href="../classes/Octopush.Message.html#method___construct" class="">__construct()</a><br />
+                                                                    <a href="../classes/Octopush.Message.html#method_setParams" class="">setParams()</a><br />
+                                                                    <a href="../classes/Octopush.Message.html#method_getParams" class="">getParams()</a><br />
+                                                                    <a href="../classes/Octopush.Message.html#method_encrypt" class="">encrypt()</a><br />
+                                                                    <a href="../classes/Octopush.Message.html#method_setMethod" class="">setMethod()</a><br />
+                                                                    <a href="../classes/Octopush.Message.html#method_setSmsRecipients" class="">setSmsRecipients()</a><br />
+                                                                    <a href="../classes/Octopush.Message.html#method_setSmsText" class="">setSmsText()</a><br />
+                                                                    <a href="../classes/Octopush.Message.html#method_setSmsType" class="">setSmsType()</a><br />
+                                                                    <a href="../classes/Octopush.Message.html#method_setSmsSender" class="">setSmsSender()</a><br />
+                                                                    <a href="../classes/Octopush.Message.html#method_setRequestMode" class="">setRequestMode()</a><br />
+                                                                    <a href="../classes/Octopush.Message.html#method_setSmsMode" class="">setSmsMode()</a><br />
+                                                                    <a href="../classes/Octopush.Message.html#method_setSendingDate" class="">setSendingDate()</a><br />
+                                                                    <a href="../classes/Octopush.Message.html#method_setSendingTime" class="">setSendingTime()</a><br />
+                                                                    <a href="../classes/Octopush.Message.html#method_setSendingPeriod" class="">setSendingPeriod()</a><br />
+                                                                    <a href="../classes/Octopush.Message.html#method_setWithReplies" class="">setWithReplies()</a><br />
+                                                                    <a href="../classes/Octopush.Message.html#method_setTransactional" class="">setTransactional()</a><br />
+                                                                    <a href="../classes/Octopush.Message.html#method_setRequestKeys" class="">setRequestKeys()</a><br />
+                                                                    <a href="../classes/Octopush.Message.html#method_setRequestId" class="">setRequestId()</a><br />
+                                                                    <a href="../classes/Octopush.Message.html#method_setMsisdnSender" class="">setMsisdnSender()</a><br />
+                                                                    <a href="../classes/Octopush.Message.html#method_setRecipientsFirstNames" class="">setRecipientsFirstNames()</a><br />
+                                                                    <a href="../classes/Octopush.Message.html#method_setRecipientsLastNames" class="">setRecipientsLastNames()</a><br />
+                                                                    <a href="../classes/Octopush.Message.html#method_setSmsFields1" class="">setSmsFields1()</a><br />
+                                                                    <a href="../classes/Octopush.Message.html#method_setSmsFields2" class="">setSmsFields2()</a><br />
+                                                                    <a href="../classes/Octopush.Message.html#method_setSmsFields3" class="">setSmsFields3()</a><br />
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No public properties found</em>
+                                                            </section>
+                            <section class="span4">
+                                                                    <a href="../classes/Octopush.Message.html#constant_SMS_LOW_COST" class="">SMS_LOW_COST</a><br />
+                                                                    <a href="../classes/Octopush.Message.html#constant_SMS_PREMIUM" class="">SMS_PREMIUM</a><br />
+                                                                    <a href="../classes/Octopush.Message.html#constant_SMS_WORLD" class="">SMS_WORLD</a><br />
+                                                                    <a href="../classes/Octopush.Message.html#constant_REAL_MODE" class="">REAL_MODE</a><br />
+                                                                    <a href="../classes/Octopush.Message.html#constant_SIMULATION_MODE" class="">SIMULATION_MODE</a><br />
+                                                                    <a href="../classes/Octopush.Message.html#constant_NO_DELAY" class="">NO_DELAY</a><br />
+                                                                    <a href="../classes/Octopush.Message.html#constant_WITH_DELAY" class="">WITH_DELAY</a><br />
+                                                            </section>
+                        </section>
+                        <section class="row-fluid protected">
+                            <section class="span4">
+                                                                    <em>No protected methods found</em>
+                                                            </section>
+                            <section class="span4">
+                                                                    <a href="../classes/Octopush.Message.html#property_chars" class="">$chars</a><br />
+                                                                    <a href="../classes/Octopush.Message.html#property_requiredKeys" class="">$requiredKeys</a><br />
+                                                                    <a href="../classes/Octopush.Message.html#property_optionalKeys" class="">$optionalKeys</a><br />
+                                                                    <a href="../classes/Octopush.Message.html#property_encryptData" class="">$encryptData</a><br />
+                                                            </section>
+                            <section class="span4">
+                                <em>N/A</em>
+                            </section>
+                        </section>
+                        <section class="row-fluid private">
+                            <section class="span4">
+                                                                    <em>No private methods found</em>
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No private properties found</em>
+                                                            </section>
+                            <section class="span4">
+                                <em>N/A</em>
+                            </section>
+                        </section>
+                    </section>
+                </div>
+                <aside class="span4 detailsbar">
+                                        
+                    
+                    <dl>
+                        <dt>File</dt>
+                            <dd><a href="../files/Message.html"><div class="path-wrapper">Message.php</div></a></dd>
+                                                <dt>Package</dt>
+                            <dd><div class="namespace-wrapper">Octopush</div></dd>
+                                                <dt>Class hierarchy</dt>
+                            <dd class="hierarchy">
+                                                                                                                                                                    <div class="namespace-wrapper">\Octopush\Message</div>
+                            </dd>
+
+                        
+                        
+                        
+                                                                            <dt>See also</dt>
+                                                                                        <dd><a href="http://www.octopush.com/api-sms-documentation"><span class="namespace-wrapper">http://www.octopush.com/api-sms-documentation</span></a></dd>
+                                                    
+                                                                        </dl>
+                    <h2>Tags</h2>
+                    <table class="table table-condensed">
+                                            <tr><td colspan="2"><em>None found</em></td></tr>
+                                        </table>
+                </aside>
+            </div>
+
+                                    <a id="constants" name="constants"></a>
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <h2>Constants</h2>
+                </div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="constant_SMS_LOW_COST" name="constant_SMS_LOW_COST" class="anchor"></a>
+            <article id="constant_SMS_LOW_COST" class="constant">
+                <h3 class="">SMS_LOW_COST</h3>
+                <pre class="signature">SMS_LOW_COST</pre>
+                <p><em>Sms low cost sms_type param</em></p>
+                
+            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="constant_SMS_PREMIUM" name="constant_SMS_PREMIUM" class="anchor"></a>
+            <article id="constant_SMS_PREMIUM" class="constant">
+                <h3 class="">SMS_PREMIUM</h3>
+                <pre class="signature">SMS_PREMIUM</pre>
+                <p><em>Sms premium sms_type param</em></p>
+                
+            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="constant_SMS_WORLD" name="constant_SMS_WORLD" class="anchor"></a>
+            <article id="constant_SMS_WORLD" class="constant">
+                <h3 class="">SMS_WORLD</h3>
+                <pre class="signature">SMS_WORLD</pre>
+                <p><em>Sms world sms_type param</em></p>
+                
+            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="constant_REAL_MODE" name="constant_REAL_MODE" class="anchor"></a>
+            <article id="constant_REAL_MODE" class="constant">
+                <h3 class="">REAL_MODE</h3>
+                <pre class="signature">REAL_MODE</pre>
+                <p><em>Sms sending real mode value param</em></p>
+                
+            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="constant_SIMULATION_MODE" name="constant_SIMULATION_MODE" class="anchor"></a>
+            <article id="constant_SIMULATION_MODE" class="constant">
+                <h3 class="">SIMULATION_MODE</h3>
+                <pre class="signature">SIMULATION_MODE</pre>
+                <p><em>Sms sending simulation mode value param</em></p>
+                
+            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="constant_NO_DELAY" name="constant_NO_DELAY" class="anchor"></a>
+            <article id="constant_NO_DELAY" class="constant">
+                <h3 class="">NO_DELAY</h3>
+                <pre class="signature">NO_DELAY</pre>
+                <p><em>Sms sending immedialty mode value param</em></p>
+                
+            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="constant_WITH_DELAY" name="constant_WITH_DELAY" class="anchor"></a>
+            <article id="constant_WITH_DELAY" class="constant">
+                <h3 class="">WITH_DELAY</h3>
+                <pre class="signature">WITH_DELAY</pre>
+                <p><em>Sms sending with delay mode value param</em></p>
+                
+            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                            
+                                    <a id="properties" name="properties"></a>
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <h2>Properties</h2>
+                </div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_chars" name="property_chars" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$chars</h3>
+                <pre class="signature">$chars : array</pre>
+                <p><em>Characters count as double</em></p>
+                
+
+                                <h4>Type</h4>
+                array
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_requiredKeys" name="property_requiredKeys" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$requiredKeys</h3>
+                <pre class="signature">$requiredKeys : array</pre>
+                <p><em>Required Parameters for api request with api_key &amp; user_login</em></p>
+                
+
+                                <h4>Type</h4>
+                array
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_optionalKeys" name="property_optionalKeys" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$optionalKeys</h3>
+                <pre class="signature">$optionalKeys : array</pre>
+                <p><em>Optionnals Parameters for api request</em></p>
+                
+
+                                <h4>Type</h4>
+                array
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_encryptData" name="property_encryptData" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$encryptData</h3>
+                <pre class="signature">$encryptData : array</pre>
+                <p><em>Data to encrypt in the url if request_keys is sets</em></p>
+                
+
+                                <h4>Type</h4>
+                array
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                            
+                                    <a id="methods" name="methods"></a>
+            <div class="row-fluid">
+                <div class="span8 content class"><h2>Methods</h2></div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method___construct" name="method___construct" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">__construct()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">__construct(array  <span class="argument">$params = array()</span>) </pre>
+                <p><em>Create a new octopush sms message</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$params </td>
+                                <td><p>the array params</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                                            <dt>See also</dt>
+                                                                <dd><a href="../classes/Octopush.Message.html#property_requiredKeys"><span class="namespace-wrapper">\Octopush\Message::requiredKeys</span></a></dd>
+                                            <dd><a href="../classes/Octopush.Message.html#property_optionalKeys"><span class="namespace-wrapper">\Octopush\Message::optionalKeys</span></a></dd>
+                                                                </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setParams" name="method_setParams" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setParams()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setParams(array  <span class="argument">$params = array()</span>) : \Octopush\Message</pre>
+                <p><em>Set the parameters message</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$params </td>
+                                <td><p>The parameters message required and optionnals</p></td>
+                            </tr>
+                                            </table>
+                
+                                    <h4>Throws</h4>
+                    <dl>
+                                                    <dt>\InvalidArgumentException</dt>
+                            <dd></dd>
+                                                                    </dl>
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/Octopush.Message.html">\Octopush\Message</a>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getParams" name="method_getParams" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getParams()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getParams() : array</pre>
+                <p><em>Returns the parameters message</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                            &mdash; <p>The parameters message required and optionnal
+in php array format</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_encrypt" name="method_encrypt" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">encrypt()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">encrypt(array  <span class="argument">$params = array()</span>) : string</pre>
+                <p><em>Encoding request_sha1 	Optionnel</em></p>
+                <p>Cette valeur contient le sha1 de la concaténation des valeurs des champs
+choisis dans la variable request_keys et concaténés dans le même
+ordre que les clés.</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$params </td>
+                                <td><p>the params</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                            &mdash; <p>the encrypt string code</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setMethod" name="method_setMethod" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setMethod()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setMethod(string  <span class="argument">$key</span>) : string</pre>
+                <p><em>Set the method name from array key</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$key </td>
+                                <td><p>The array key</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                            &mdash; <p>The fomatted method name</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setSmsRecipients" name="method_setSmsRecipients" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setSmsRecipients()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setSmsRecipients(mixed  <span class="argument">$recipients</span>) : \Octopush\Message</pre>
+                <p><em>The sms_recipients field - [Required]</em></p>
+                <p>List of numbers in international format + XXZZZZZ separated by commas.</p>
+<p>Liste des numéros au format international +XXZZZZZ séparés par des ,</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>mixed</td>
+                                <td>$recipients </td>
+                                <td><p>numéros de phone</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/Octopush.Message.html">\Octopush\Message</a>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setSmsText" name="method_setSmsText" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setSmsText()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setSmsText(string  <span class="argument">$text</span>) : \Octopush\Message</pre>
+                <p><em>The sms_text field - [Required]</em></p>
+                <p>Message text (maximum 459 characters).</p>
+<p>Texte du message (maximum 459 caractères)</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$text </td>
+                                <td><p>The string message text</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/Octopush.Message.html">\Octopush\Message</a>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setSmsType" name="method_setSmsType" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setSmsType()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setSmsType(string  <span class="argument">$type</span>) : \Octopush\Message</pre>
+                <p><em>The sms_type field - [Required]</em></p>
+                <p>SMS Type: XXX = Low Cost SMS; FR = Premium SMS; WWW = Global SMS.
+In France, if &quot;STOP XXXXX&quot; is missing from your text, the API will
+return an error.</p>
+<p>Type de SMS : XXX = SMS LowCost ; FR = SMS Premium; WWW = SMS Monde.
+En France, si la mention « STOP au XXXXX » est absente de votre texte,
+l'API renverra une erreur.</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$type </td>
+                                <td><p>The message type maybe XXX | FR | WWW</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/Octopush.Message.html">\Octopush\Message</a>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setSmsSender" name="method_setSmsSender" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setSmsSender()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setSmsSender(string  <span class="argument">$sender</span>) : \Octopush\Message</pre>
+                <p><em>Sender of the message (if the user allows it), 3-11 alphanumeric characters (a-zA-Z).</em></p>
+                <p>Expéditeur du message (si l'opérateur le permet), 3 à 11 caractères alpha-numériques (a-zA-Z).</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$sender </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/Octopush.Message.html">\Octopush\Message</a>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setRequestMode" name="method_setRequestMode" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setRequestMode()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setRequestMode(string  <span class="argument">$mode</span>) : \Octopush\Message</pre>
+                <p><em>The request_mode param 	Optionnel</em></p>
+                <p>Allows you to choose simulation mode with the value 'simu'. * Default: real</p>
+<p>Permet de choisir le mode simulation avec la valeur 'simu'. * défaut : real</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$mode </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/Octopush.Message.html">\Octopush\Message</a>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setSmsMode" name="method_setSmsMode" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setSmsMode()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setSmsMode(integer  <span class="argument">$mode</span>) </pre>
+                <p><em>The sms_mode param - [Optionnel]</em></p>
+                <p>Sending profile :
+default : 1</p>
+<ul>
+<li>1 = Instant sending,</li>
+<li>
+<p>2 = Delayed sending (you must specify the date)</p>
+<p>Mode d'envoi :
+défaut : 1</p>
+<ul>
+<li>1 = Envoi Instantané,</li>
+<li>2 = Envoi Différé (il faut alors spécifier la date)</li>
+</ul>
+</li>
+</ul>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$mode </td>
+                                <td><p>@return \Octopush\Message</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setSendingDate" name="method_setSendingDate" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setSendingDate()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setSendingDate(\DateTime  <span class="argument">$timestamp</span>) : \Octopush\Message</pre>
+                <p><em>The sending_date param - [Conditional]</em></p>
+                <p>[If mode = 2, deprecated] Timestamp, shown in GMT + 1</p>
+<p>[Si sms_mode = 2, deprecated] Timestamp, indiqué en GMT+1</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\DateTime</td>
+                                <td>$timestamp </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/Octopush.Message.html">\Octopush\Message</a>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setSendingTime" name="method_setSendingTime" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setSendingTime()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setSendingTime(\DateTime  <span class="argument">$timestamp</span>) : \Octopush\Message</pre>
+                <p><em>The sending_time param - [Optional]</em></p>
+                <p>Timestamp, shown in GMT + 1</p>
+<p>Timestamp, indiqué en GMT+1</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\DateTime</td>
+                                <td>$timestamp </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/Octopush.Message.html">\Octopush\Message</a>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setSendingPeriod" name="method_setSendingPeriod" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setSendingPeriod()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setSendingPeriod(\DateTime  <span class="argument">$timestamp</span>) : \Octopush\Message</pre>
+                <p><em>The sending_period param -	[Optional]</em></p>
+                <p>Period desired (in seconds) before the sending.
+This field allows you to define the time before
+the desired date and to prevent timezone confusing</p>
+<p>Delai souhaité avant envoi.</p>
+<p>Ce champ vous permet de définir le temps qui
+vous sépare de la date souhaitée
+et d'éviter les confusions de timezone</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\DateTime</td>
+                                <td>$timestamp </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/Octopush.Message.html">\Octopush\Message</a>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setWithReplies" name="method_setWithReplies" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setWithReplies()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setWithReplies(integer  <span class="argument">$withReply = true</span>) : \Octopush\Message</pre>
+                <p><em>The with_replies param	- [Optionnel]</em></p>
+                <p>Set to 1 to indicate that you want answers to messages that were sent</p>
+<p>Instancier à 1 pour indiquer que vous souhaitez les réponses aux SMS envoyés</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$withReply </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/Octopush.Message.html">\Octopush\Message</a>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setTransactional" name="method_setTransactional" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setTransactional()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setTransactional(boolean  <span class="argument">$transactional = true</span>) : \Octopush\Message</pre>
+                <p><em>The transactional param - [Optional]</em></p>
+                <p>Set to 1 to confirm these messages, or alert us(24/7) to a FORMAL BAN on
+SMS marketing with this option (any abuse of this feature may lead to
+immediate account suspension and a fine of €1,000 per violation)</p>
+<p>Instancier à 1 pour les envois de type confirmation,
+ou alerte (7j/7, h24) INTERDICTION FORMELLE d'envoyer du SMS marketing
+avec cette option (tout abus est passible d'une suspension
+immédiate du compte, ainsi que d'une amende de 1000€
+par infraction constatée)</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>boolean</td>
+                                <td>$transactional </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/Octopush.Message.html">\Octopush\Message</a>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                                            <dt>See also</dt>
+                                                                <dd><a href="http://www.octopush.com/api-sms-doc/sms-transactionnel"><span class="namespace-wrapper">http://www.octopush.com/api-sms-doc/sms-transactionnel</span></a></dd>
+                                                                </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setRequestKeys" name="method_setRequestKeys" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setRequestKeys()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setRequestKeys(string  <span class="argument">$requestKeys</span>) : \Octopush\Message</pre>
+                <p><em>The request_keys param -	[Optional]</em></p>
+                <p>Lists the key fields of the application you want to add in the sha1 hash.
+Example: 'TRYS ' (for fields sms_text, sms_recipients, sms_type,
+sms_sender). See the table of keys attached.</p>
+<p>Contient la liste des clés des champs de la requête que vous souhaitez
+ajouter dans le hash sha1.
+Exemple : 'TRYS' (pour les champs sms_text, sms_recipients, sms_type, sms_sender).
+Voir le tableau des clés en annexe.</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$requestKeys </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/Octopush.Message.html">\Octopush\Message</a>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                                            <dt>See also</dt>
+                                                                <dd><a href="http://www.octopush.com/api-sms-doc/parametres"><span class="namespace-wrapper">http://www.octopush.com/api-sms-doc/parametres</span></a></dd>
+                                                                </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setRequestId" name="method_setRequestId" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setRequestId()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setRequestId(string  <span class="argument">$rid</span>) : \Octopush\Message</pre>
+                <p><em>The request_id param - [Optional]</em></p>
+                <p>Specifies secure sending. If the field is not null, then the system
+will check if there are already messages with the same request_id.
+If there are, the request is ignored.</p>
+<p>Permet d'ajouter une sécurité à l'envoi.
+Si ce champ est différent de null, alors le système viendra vérifier
+s'il n'y pas déjà un de vos envois ayant le même request_id.
+Si c'est le cas, la requête est ignorée.</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$rid </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/Octopush.Message.html">\Octopush\Message</a>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setMsisdnSender" name="method_setMsisdnSender" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setMsisdnSender()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setMsisdnSender(integer  <span class="argument">$sender</span>) : \Octopush\Message</pre>
+                <p><em>The msisdn_sender param - [Optional]</em></p>
+                <p>Default: 0. Some operators allow international phone numbers as sender.
+In this case, the field must be 1.</p>
+<p>défaut : 0.
+Certains opérateurs internationaux autorisent
+les numéros de téléphone comme émetteur.
+Dans ce cas, ce champ doit être à 1.</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$sender </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/Octopush.Message.html">\Octopush\Message</a>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setRecipientsFirstNames" name="method_setRecipientsFirstNames" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setRecipientsFirstNames()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setRecipientsFirstNames(array  <span class="argument">$firstnames = array()</span>) : \Octopush\Message</pre>
+                <p><em>The recipients_first_names param -	[Optional]</em></p>
+                <p>Replacing the string {prenom} of your message.</p>
+<p>Remplacent la chaîne {prenom} de votre message.</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$firstnames </td>
+                                <td><p>The array of firstnames</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/Octopush.Message.html">\Octopush\Message</a>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setRecipientsLastNames" name="method_setRecipientsLastNames" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setRecipientsLastNames()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setRecipientsLastNames(array  <span class="argument">$lastnames = array()</span>) : \Octopush\Message</pre>
+                <p><em>The recipients_last_names 	- [Optional]</em></p>
+                <p>Replacing {nom} string of your message.</p>
+<p>Remplacent la chaîne {nom} de votre message.</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$lastnames </td>
+                                <td><p>The array of lastnames</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/Octopush.Message.html">\Octopush\Message</a>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setSmsFields1" name="method_setSmsFields1" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setSmsFields1()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setSmsFields1(array  <span class="argument">$fields = array()</span>) : \Octopush\Message</pre>
+                <p><em>The sms_fields_1 param - [Optional]</em></p>
+                <p>Replacing the string {ch1} of your message.</p>
+<p>Remplacent la chaîne {ch1} de votre message.</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$fields </td>
+                                <td><p>The array of ch1 string value</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/Octopush.Message.html">\Octopush\Message</a>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setSmsFields2" name="method_setSmsFields2" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setSmsFields2()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setSmsFields2(array  <span class="argument">$fields = array()</span>) : \Octopush\Message</pre>
+                <p><em>The sms_fields_2 param - [Optional]</em></p>
+                <p>Replacing the string {ch2} of your message.</p>
+<p>Remplacent la chaîne {ch2} de votre message.</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$fields </td>
+                                <td><p>The array of ch2 string value</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/Octopush.Message.html">\Octopush\Message</a>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setSmsFields3" name="method_setSmsFields3" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setSmsFields3()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setSmsFields3(array  <span class="argument">$fields = array()</span>) : \Octopush\Message</pre>
+                <p><em>The sms_fields_3 param -	[Optional]</em></p>
+                <p>Replacing the string {ch3} of your message.</p>
+<p>Remplacent la chaîne {ch3} de votre message.</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$fields </td>
+                                <td><p>The array of ch3 string value</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/Octopush.Message.html">\Octopush\Message</a>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                                    </div>
+    </section>
+
+    <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="source-view-label">Message.php</h3>
+        </div>
+        <div class="modal-body">
+            <pre data-src="../files/Message.php.txt" class="language-php line-numbers"></pre>
+        </div>
+    </div>
+
+    <footer class="row-fluid">
+        <section class="span10 offset2">
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <section class="row-fluid footer-sections">
+                        <section class="span4">
+                                                        <h1><i class="icon-code"></i></h1>
+                            <div>
+                                <ul>
+                                                                            <li><a href="../namespaces/Octopush.html">\Octopush</a></li>
+                                                                    </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                                                        <h1><i class="icon-bar-chart"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../graphs/class.html">Class Hierarchy Diagram</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                                                        <h1><i class="icon-pushpin"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../reports/errors.html">Errors</a></li>
+                                    <li><a href="../reports/markers.html">Markers</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                    </section>
+                </section>
+            </section>
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <hr />
+                    Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
+                    on May 3rd, 2018 at 20:54.
+                </section>
+            </section>
+        </section>
+    </footer>
+</div>
+
+</body>
+</html>

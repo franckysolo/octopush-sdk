@@ -44,7 +44,18 @@ class ApiTest extends AbstractTest
      */
     public function testApiGetBalance($api)
     {
-        $this->assertGreaterThan(0, $api->getBalance());
+        $this->assertCount(2, $api->getBalance());
+    }
+
+
+    /**
+     * @test
+     * @depends testCreateInstanceOfApi
+     * @return void
+     */
+    public function testApiGetLowCostBalance($api)
+    {
+        $this->assertGreaterThan(0, $api->getLowCostBalance());
     }
 
     /**
@@ -52,9 +63,9 @@ class ApiTest extends AbstractTest
      * @depends testCreateInstanceOfApi
      * @return void
      */
-    public function testApiGetBalancePremium($api)
+    public function testApiGetPremiumBalance($api)
     {
-        $this->assertGreaterThan(0, $api->getBalance(false));
+        $this->assertGreaterThan(0, $api->getPremiumBalance());
     }
 
     /**
@@ -65,7 +76,7 @@ class ApiTest extends AbstractTest
     public function testApiSimulateErrorCode($api)
     {
         $api = new Api($this->login, 'wrong_api_key');
-        $balance = $api->getBalance();
+        $balance = $api->getPremiumBalance();
         $this->assertEquals(0, $balance);
         $credit = $api->getCredit();
         $this->assertEquals(0, $credit);

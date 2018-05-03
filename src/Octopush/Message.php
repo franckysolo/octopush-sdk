@@ -2,7 +2,7 @@
 /**
  * The Message class
  *
- * @version 1.0.1
+ * @version 1.0.2
  * @package Octopush
  * @author franckysolo <franckysolo@gmail.com>
  */
@@ -240,7 +240,11 @@ class Message
     }
 
     /**
-     * Liste des numéros au format international +XXZZZZZ,
+     * The sms_recipients field - [Required]
+     *
+     * List of numbers in international format + XXZZZZZ separated by commas.
+     *
+     * Liste des numéros au format international +XXZZZZZ séparés par des ,
      *
      * @param mixed $recipients  numéros de phone
      * @return \Octopush\Message
@@ -253,9 +257,13 @@ class Message
     }
 
     /**
-     * Texte du message
+     * The sms_text field - [Required]
      *
-     * @param string $text (maximum 459 caractères)
+     * Message text (maximum 459 characters).
+     *
+     * Texte du message (maximum 459 caractères)
+     *
+     * @param string $text The string message text
      * @return \Octopush\Message
      */
     public function setSmsText($text)
@@ -268,13 +276,19 @@ class Message
         $this->params['sms_text'] = trim($text);
         return $this;
     }
+
     /**
-     * Type de SMS : XXX = SMS LowCost ; FR = SMS Premium; WWW = SMS Monde.
+     * The sms_type field - [Required]
      *
+     * SMS Type: XXX = Low Cost SMS; FR = Premium SMS; WWW = Global SMS.
+     * In France, if "STOP XXXXX" is missing from your text, the API will
+     * return an error.
+     *
+     * Type de SMS : XXX = SMS LowCost ; FR = SMS Premium; WWW = SMS Monde.
      * En France, si la mention « STOP au XXXXX » est absente de votre texte,
      * l'API renverra une erreur.
      *
-     * @param string $type
+     * @param string $type The message type maybe XXX | FR | WWW
      * @return \Octopush\Message
      */
     public function setSmsType($type)
@@ -288,8 +302,9 @@ class Message
     }
 
     /**
-     * Expéditeur du message (si l'opérateur le permet),
-     * 3 à 11 caractères alpha- numériques (a-zA-Z).
+     * Sender of the message (if the user allows it), 3-11 alphanumeric characters (a-zA-Z).
+     *
+     * Expéditeur du message (si l'opérateur le permet), 3 à 11 caractères alpha-numériques (a-zA-Z).
      *
      * @param string $sender
      * @return \Octopush\Message
@@ -307,10 +322,11 @@ class Message
     }
 
     /**
-     *  request_mode 	Optionnel
+     *  The request_mode param 	Optionnel
      *
-     *  Permet de choisir le mode simulation
-     *  avec la valeur 'simu'. * défaut : real
+     *  Allows you to choose simulation mode with the value 'simu'. * Default: real
+     *
+     *  Permet de choisir le mode simulation avec la valeur 'simu'. * défaut : real
      *
      * @param string $mode
      * @return \Octopush\Message
@@ -329,7 +345,12 @@ class Message
     }
 
     /**
-     *  sms_mode 	Optionnel
+     *  The sms_mode param - [Optionnel]
+     *
+     *  Sending profile :
+     *    default : 1
+     *    * 1 = Instant sending,
+     *    * 2 = Delayed sending (you must specify the date)
      *
      *  Mode d'envoi :
      *    défaut : 1
@@ -353,10 +374,11 @@ class Message
     }
 
     /**
-     * sending_date 	Conditionnel
+     * The sending_date param - [Conditional]
      *
-     *  [Si sms_mode = 2, deprecated]
-     *  Timestamp, indiqué en GMT+1
+     *  [If mode = 2, deprecated] Timestamp, shown in GMT + 1
+     *
+     *  [Si sms_mode = 2, deprecated] Timestamp, indiqué en GMT+1
      *
      * @param \DateTime $timestamp
      * @return \Octopush\Message
@@ -366,8 +388,11 @@ class Message
         $this->params['sending_date'] = $timestamp->getTimestamp();
         return $this;
     }
+
     /**
-     * sending_time 	Optionnel
+     * The sending_time param - [Optional]
+     *
+     * Timestamp, shown in GMT + 1
      *
      * Timestamp, indiqué en GMT+1
      *
@@ -381,7 +406,12 @@ class Message
     }
 
     /**
-     *   sending_period 	Optionnel
+     *   The sending_period param -	[Optional]
+     *
+     *   Period desired (in seconds) before the sending.
+     *   This field allows you to define the time before
+     *   the desired date and to prevent timezone confusing
+     *
      *   Delai souhaité avant envoi.
      *
      *   Ce champ vous permet de définir le temps qui
@@ -398,9 +428,11 @@ class Message
     }
 
     /**
-     *  with_replies 	Optionnel
-     *   Instancier à 1
-     *   pour indiquer que vous souhaitez les réponses aux SMS envoyés
+     *   The with_replies param	- [Optionnel]
+     *
+     *   Set to 1 to indicate that you want answers to messages that were sent
+     *
+     *   Instancier à 1 pour indiquer que vous souhaitez les réponses aux SMS envoyés
      *
      * @param int $withReply
      * @return \Octopush\Message
@@ -412,14 +444,19 @@ class Message
         }
         return $this;
     }
+
     /**
-     * transactional 	Optionnel
+     * The transactional param - [Optional]
      *
-     * Instancier à 1 pour les envois de type confirmation,
-     * ou alerte (7j/7, h24) INTERDICTION FORMELLE d'envoyer du SMS marketing
-     * avec cette option (tout abus est passible d'une suspension
-     * immédiate du compte, ainsi que d'une amende de 1000€
-     * par infraction constatée)
+     *  Set to 1 to confirm these messages, or alert us(24/7) to a FORMAL BAN on
+     *  SMS marketing with this option (any abuse of this feature may lead to
+     *  immediate account suspension and a fine of €1,000 per violation)
+     *
+     *  Instancier à 1 pour les envois de type confirmation,
+     *  ou alerte (7j/7, h24) INTERDICTION FORMELLE d'envoyer du SMS marketing
+     *  avec cette option (tout abus est passible d'une suspension
+     *  immédiate du compte, ainsi que d'une amende de 1000€
+     *  par infraction constatée)
      *
      * @see http://www.octopush.com/api-sms-doc/sms-transactionnel
      * @param bool $transactional
@@ -434,7 +471,11 @@ class Message
     }
 
     /**
-     *   request_keys 	Optionnel
+     *   The request_keys param -	[Optional]
+     *
+     *   Lists the key fields of the application you want to add in the sha1 hash.
+     *   Example: 'TRYS ' (for fields sms_text, sms_recipients, sms_type,
+     *   sms_sender). See the table of keys attached.
      *
      *   Contient la liste des clés des champs de la requête que vous souhaitez
      *   ajouter dans le hash sha1.
@@ -452,14 +493,16 @@ class Message
     }
 
     /**
-     *  request_id 	Optionnel
+     *  The request_id param - [Optional]
+     *
+     *  Specifies secure sending. If the field is not null, then the system
+     *  will check if there are already messages with the same request_id.
+     *  If there are, the request is ignored.
      *
      *  Permet d'ajouter une sécurité à l'envoi.
-     *
      *  Si ce champ est différent de null, alors le système viendra vérifier
-     *  s'il n'y pas déjà un de vos envois ayant
-     *  le même request_id. Si c'est le cas,
-     *  la requête est ignorée.
+     *  s'il n'y pas déjà un de vos envois ayant le même request_id.
+     *  Si c'est le cas, la requête est ignorée.
      *
      * @param string $rid
      * @return \Octopush\Message
@@ -471,7 +514,10 @@ class Message
     }
 
     /**
-     * msisdn_sender 	Optionnel
+     * The msisdn_sender param - [Optional]
+     *
+     * Default: 0. Some operators allow international phone numbers as sender.
+     * In this case, the field must be 1.
      *
      * défaut : 0.
      * Certains opérateurs internationaux autorisent
@@ -495,11 +541,13 @@ class Message
     }
 
     /**
-     * recipients_first_names 	Optionnel
+     * The recipients_first_names param -	[Optional]
+     *
+     * Replacing the string {prenom} of your message.
      *
      * Remplacent la chaîne {prenom} de votre message.
      *
-     * @param array $firstnames
+     * @param array $firstnames The array of firstnames
      * @return \Octopush\Message
      */
     public function setRecipientsFirstNames(array $firstnames = [])
@@ -508,12 +556,13 @@ class Message
         return $this;
     }
     /**
-     * recipients_last_names 	Optionnel
+     * The recipients_last_names 	- [Optional]
      *
-     * Remplacent la chaîne {nom} de votre message,
-     * séparés par des virgules.
+     * Replacing {nom} string of your message.
      *
-     * @param array $lastnames
+     * Remplacent la chaîne {nom} de votre message.
+     *
+     * @param array $lastnames The array of lastnames
      * @return \Octopush\Message
      */
     public function setRecipientsLastNames(array $lastnames = [])
@@ -521,12 +570,15 @@ class Message
         $this->params['recipients_last_names'] = implode(',', $lastnames);
         return $this;
     }
+
     /**
-     * sms_fields_1 	Optionnel
+     * The sms_fields_1 param - [Optional]
      *
-     * Remplacent la chaîne {ch1} de votre message, séparés par des virgules.
+     * Replacing the string {ch1} of your message.
      *
-     * @param array $fields
+     * Remplacent la chaîne {ch1} de votre message.
+     *
+     * @param array $fields The array of ch1 string value
      * @return \Octopush\Message
      */
     public function setSmsFields1(array $fields = [])
@@ -534,12 +586,15 @@ class Message
         $this->params['sms_fields_1'] = implode(',', $fields);
         return $this;
     }
+
     /**
-     * sms_fields_2 	Optionnel
+     * The sms_fields_2 param - [Optional]
      *
-     * Remplacent la chaîne {ch2} de votre message, séparés par des virgules.
+     * Replacing the string {ch2} of your message.
      *
-     * @param array $fields
+     * Remplacent la chaîne {ch2} de votre message.
+     *
+     * @param array $fields The array of ch2 string value
      * @return \Octopush\Message
      */
     public function setSmsFields2(array $fields = [])
@@ -547,12 +602,15 @@ class Message
         $this->params['sms_fields_2'] = implode(',', $fields);
         return $this;
     }
+
     /**
-     * sms_fields_3 	Optionnel
+     * The sms_fields_3 param -	[Optional]
      *
-     * Remplacent la chaîne {ch3} de votre message, séparés par des virgules.
+     * Replacing the string {ch3} of your message.
      *
-     * @param array $fields
+     * Remplacent la chaîne {ch3} de votre message.
+     *
+     * @param array $fields The array of ch3 string value
      * @return \Octopush\Message
      */
     public function setSmsFields3(array $fields = [])

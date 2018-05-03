@@ -2,7 +2,7 @@
 /**
  * The client object
  *
- * @version 1.0.1
+ * @version 1.0.2
  * @package Octopush
  * @author franckysolo <franckysolo@gmail.com>
  */

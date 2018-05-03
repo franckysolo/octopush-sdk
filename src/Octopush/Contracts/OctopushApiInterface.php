@@ -2,7 +2,7 @@
 /**
  * The API Interface
  *
- * @version 1.0.1
+ * @version 1.0.2
  * @package Octopush
  * @subpackage Contracts
  * @author franckysolo <franckysolo@gmail.com>
@@ -32,9 +32,9 @@ interface OctopushApiInterface
      * Returns the remaining balance in premium or standard
      *
      * @param  bool $standard true for standard | false for premium
-     * @return float the value in sms
+     * @return array The balance array
      */
-    public function getBalance($standard);
+    public function getBalance();
 
     /**
      * Send a sms message
