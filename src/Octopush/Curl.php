@@ -64,19 +64,19 @@ class Curl
         $response = curl_exec($this->handle);
         $responseCode = $this->infos();
 
+        if (false === $response) {
+            $errorMessage = curl_error($this->handle) ?? 'no curl error specify';
+            $errno = curl_errno($this->handle);
+            throw new CurlResponseException(
+                sprintf('Could not get response from Octopush service: %s', $errorMessage),
+                $errno
+            );
+        }
+
         if ($responseCode !== 200) {
             throw new CurlResponseCodeException(
                 sprintf('Octopush API Server returns error code %d', $responseCode),
                 500
-            );
-        }
-
-        if (false === $response) {
-            $erroMessage = curl_error($ch) ?? 'no curl error specify';
-            $errno = curl_errno($ch);
-            throw new CurlResponseException(
-                sprintf('Could not get response from Octopush service: %s', $errorMessage),
-                $errno
             );
         }
 
